@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ByteBoost Mentorship — Be Semester‑1 Ready</title>
+  <meta name="description" content="ByteBoost Mentorship: a cohort-style program that gives prospective CS undergrads a real head-start — DSA, OOP, discrete math, projects, and mentor feedback." />
+  <meta property="og:title" content="ByteBoost Mentorship — Be Semester‑1 Ready" />
+  <meta property="og:description" content="Core CS + projects + mentor reviews. Join the next cohort." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/<your-user>/<your-repo>/main/og-image.png" />
+  <meta name="theme-color" content="#0d1b2a" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1020;         /* deep navy */
+      --card:#101935;       /* card surface */
+      --text:#e6eef8;       /* high-contrast text */
+      --muted:#a9b6cc;      /* secondary text */
+      --brand:#22d3ee;      /* cyan */
+      --accent:#f59e0b;     /* amber */
+      --ok:#34d399;         /* green */
+      --fail:#ef4444;       /* red */
+      --ring:0 0 0 3px rgba(34,211,238,.3);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+      --max:1120px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;background:linear-gradient(180deg,#0b1020 0%,#0b1020 60%,#0d1226 100%);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
+    html{scroll-behavior:smooth}
+    body{padding-top:70px}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:var(--max);margin:0 auto;padding:0 clamp(14px,3vw,24px)}
+    header{position:fixed;top:0;left:0;right:0;z-index:40;background:rgba(11,16,32,.7);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.06)}
+    nav{display:flex;align-items:center;justify-content:space-between;gap:16px;height:64px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .brand svg{width:36px;height:36px;flex:0 0 auto}
+    .brand span{font-weight:800;letter-spacing:.2px}
+    .menu-btn{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:#132148;color:var(--text)}
+    .menu-btn:focus-visible,.btn:focus-visible{outline:var(--ring)}
+    .nav-links{display:flex;gap:18px;align-items:center}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:12px 18px;border-radius:14px;background:var(--brand);color:#041018;font-weight:700;box-shadow:var(--shadow);transition:.2s transform}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.alt{background:#1f2a4a;color:var(--text);border:1px solid rgba(255,255,255,.08)}
+    .hero{padding:clamp(40px,8vw,72px) 0 clamp(24px,6vw,40px);position:relative;overflow:hidden}
+    .hero .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(14px,3vw,28px)}
+    .headline{font-size:clamp(26px,5.2vw,54px);line-height:1.04;margin:0 0 12px;font-weight:800}
+    .sub{color:var(--muted);font-size:clamp(14px,1.6vw,18px)}
+    .hero-card{margin-top:18px;background:linear-gradient(180deg,#101935,#0f1b37);padding:clamp(12px,2.2vw,18px);border:1px solid rgba(255,255,255,.07);border-radius:var(--radius);display:flex;gap:10px;flex-wrap:wrap}
+    .pill{padding:8px 12px;border-radius:999px;background:#122149;border:1px solid rgba(255,255,255,.08);color:#cfe7ff;font-weight:600}
+    .cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+    .card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:var(--radius);padding:clamp(16px,2.2vw,22px);box-shadow:var(--shadow)}
+    section{padding:clamp(42px,8vw,64px) 0}
+    h2{margin:0 0 18px;font-size:clamp(20px,3.4vw,34px)}
+    .features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .features .card p{color:var(--muted)}
+    .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    .list{display:grid;gap:10px;margin:0;padding:0}
+    .list li{list-style:none;background:#0f1b37;border:1px solid rgba(255,255,255,.06);padding:12px 14px;border-radius:12px}
+    .price{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .price .num{font-size:clamp(24px,3.2vw,34px);font-weight:800}
+    .check{color:var(--ok);font-weight:700}
+    .muted{color:var(--muted)}
+    .faq{display:grid;grid-template-columns:1fr;gap:12px}
+    details{background:var(--card);border-radius:12px;border:1px solid rgba(255,255,255,.06);padding:14px}
+    summary{cursor:pointer;font-weight:700}
+    footer{padding:48px 0;border-top:1px solid rgba(255,255,255,.08);color:var(--muted)}
+
+    /* Tablet */
+    @media(max-width:960px){
+      .hero .grid,.features,.two,.price{grid-template-columns:1fr}
+    }
+
+    /* Mobile nav & tweaks */
+    @media(max-width:768px){
+      .menu-btn{display:inline-flex}
+      .nav-links{position:fixed;left:0;right:0;top:64px;bottom:auto;background:rgba(7,12,28,.98);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.08);display:grid;gap:8px;padding:16px;transform:translateY(-120%);opacity:0;pointer-events:none;transition:.22s ease}
+      .nav-links a{padding:12px 10px;border-radius:12px}
+      .nav-links.open{transform:translateY(0);opacity:1;pointer-events:auto}
+    }
+
+    /* Small phones */
+    @media(max-width:420px){
+      .brand span{display:none}
+      nav{gap:8px}
+      .btn{padding:10px 14px;border-radius:12px}
+      .pill{padding:6px 10px}
+    }
+
+    /* Accessibility */
+    @media(prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .btn,.nav-links{transition:none}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="#" class="brand" aria-label="ByteBoost Mentorship">
+          <!-- Inline SVG: icon-only logo (hex badge + book + circuits + upward arrow) -->
+          <svg viewBox="0 0 128 128" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="g1" x1="0" x2="0" y1="0" y2="1">
+                <stop offset="0" stop-color="#22d3ee"/>
+                <stop offset="1" stop-color="#2dd4bf"/>
+              </linearGradient>
+            </defs>
+            <path d="M64 6 12 36v56l52 30 52-30V36L64 6z" fill="#0f1b37" stroke="#1d2d55" stroke-width="4"/>
+            <path d="M38 86c0-8 10-10 26-10s26 2 26 10V48c0-8-10-10-26-10S38 40 38 48v38z" fill="url(#g1)" stroke="#0e1933" stroke-width="4"/>
+            <path d="M64 28l14 14H50L64 28z" fill="#f59e0b"/>
+            <g stroke="#0e1933" stroke-width="4" stroke-linecap="round">
+              <path d="M52 55c6 0 10 5 10 11v20"/>
+              <circle cx="52" cy="55" r="3" fill="#0e1933"/>
+              <path d="M76 55c-6 0-10 5-10 11"/>
+              <circle cx="76" cy="55" r="3" fill="#0e1933"/>
+            </g>
+          </svg>
+          <span>ByteBoost</span>
+        </a>
+        <button class="menu-btn" aria-label="Toggle menu" aria-controls="primary-nav" aria-expanded="false">≡</button>
+        <div id="primary-nav" class="nav-links" role="navigation">
+          <a href="#program" class="muted">Program</a>
+          <a href="#syllabus" class="muted">Syllabus</a><a href="#faq" class="muted">FAQ</a>
+          <a class="btn" href="#apply">Enroll Now</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container grid">
+        <div>
+          <h1 class="headline">Be Semester‑1 Ready — Before Day One</h1>
+          <p class="sub">A mentorship program for aspiring CS undergrads. Master the core (DSA, OOP, discrete math), build projects, and adopt the mindset to thrive from week one.</p>
+          <div class="hero-card">
+            <span class="pill">Format: Live online + projects</span>
+            <span class="pill">Seats: Limited</span>
+          </div>
+          <div class="cta">
+            <a class="btn" href="#apply">Enroll Now</a>
+            <a class="btn alt" href="#syllabus">View Syllabus</a>
+          </div>
+        </div>
+        <div class="card">
+          <h2 style="margin-top:0">What you’ll gain</h2>
+          <ul class="list" aria-label="Benefits">
+            <li><strong>University‑ready foundations</strong> in DSA, OOP, and discrete math habits</li>
+            <li><strong>Projects + code reviews</strong> every week for real practice</li>
+            <li><strong>Study systems</strong> for exams, note‑taking, and time management</li>
+            <li><strong>Mentor check‑ins</strong> and a focused peer community</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="program">
+      <div class="container">
+        <h2>Program at a glance</h2>
+        <div class="features">
+          <div class="card">
+            <h3>Who it’s for</h3>
+            <p>Class 11–12 & gap‑year students targeting CS undergrad (India & abroad).</p>
+          </div>
+          <div class="card">
+            <h3>Format</h3>
+            <p>8–10 weeks · 2 live sessions/week · capstone project · office hours · certificate.</p>
+          </div>
+          <div class="card">
+            <h3>Outcomes</h3>
+            <p>Arrive at university confident: think like an engineer, code with structure, and study with intent.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYLLABUS/SYSTEMS -->
+    <section id="syllabus">
+      <div class="container two">
+        <div class="card">
+          <h2>Syllabus (core modules)</h2>
+          <ul class="list">
+            <li><strong>Algorithms & DSA:</strong> arrays → graphs, complexity, patterns (two‑pointers, greedy, DP mindset)</li>
+            <li><strong>C Programming:</strong> syntax & flow, pointers, arrays/strings, functions, memory model, basic file I/O</li>
+            <li><strong>OOP & Design:</strong> classes/objects, interfaces, SOLID taste, testing</li>
+            <li><strong>Discrete Math Habits:</strong> logic, sets, proofs‑lite, invariants</li>
+            <li><strong>Systems Taste:</strong> OS & networks intuition, processes, memory, sockets (intro)</li>
+            <li><strong>Tools:</strong> Git, Linux, debugging, code review etiquette</li>
+            <li><strong>Capstone:</strong> mini‑project with review + presentation</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h2>How ByteBoost teaches</h2>
+          <ul class="list">
+            <li><span class="check">✓</span> University‑style problem sets</li>
+            <li><span class="check">✓</span> Weekly feedback & accountability</li>
+            <li><span class="check">✓</span> Simple rubrics & mock assessments</li>
+            <li><span class="check">✓</span> 1:1 mentor check‑ins</li>
+            <li><span class="check">✓</span> Discord for peer help & wins</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section>
+      <div class="container two">
+        <div class="card">
+          <h2>What students say</h2>
+          <p>“The weekly projects felt like real uni assignments. I arrived on campus confident.”</p>
+          <p>“Before ByteBoost, DP terrified me. Now I can break problems down and code calmly.”</p>
+        </div>
+        <div class="card">
+          <h2>For parents & counselors</h2>
+          <p class="muted">Our goal is a smoother first semester. We build disciplined study habits, practical coding skills, and accountability — not just tutorials.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container faq">
+        <h2>FAQ</h2>
+        <details>
+          <summary>Do I need prior coding experience?</summary>
+          <p>Helpful, but not required. We begin from fundamentals and ramp up with weekly practice. If you're brand‑new, we’ll share a short prep pack (syntax basics + problem‑solving patterns) before Week‑1.</p>
+          <ul class="list">
+            <li>Optional pre‑work: variables, loops, functions, arrays</li>
+            <li>Bridge sessions for absolute beginners during Week‑1</li>
+            <li>Office hours for catch‑up questions</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Which languages do you use?</summary>
+          <p>We use <strong>C</strong> to build low‑level clarity (pointers, memory), <strong>Python</strong> for algorithms and quick iteration, and <strong>Java</strong> for OOP perspective. The goal is thinking skills that transfer across languages.</p>
+        </details>
+        <details>
+          <summary>How much time per week?</summary>
+          <p>~6–8 hours: 2 live sessions + assignments + optional labs. Expect steady, manageable work rather than cramming.</p>
+          <ul class="list">
+            <li>Live: 2 × 90‑min</li>
+            <li>Practice: 2–3 hrs problem sets</li>
+            <li>Capstone weeks: add 1–2 hrs</li>
+          </ul>
+        </details>
+        <details>
+          <summary>Is there 1:1 help?</summary>
+          <p>Yes. Instructor office hours, async feedback on code, and quick DM help in our Discord. We also run short clinics on tough topics (recursion, DP, pointers).</p>
+        </details>
+        <details>
+          <summary>Will sessions be recorded?</summary>
+          <p>Yes, recordings are shared within 24 hours and available through the cohort window. We also provide annotated notes and solution walkthroughs.</p>
+        </details>
+        <details>
+          <summary>What do I need installed?</summary>
+          <p>A laptop with internet access. We’ll guide you to install VS Code, a C compiler (<code>gcc</code> / <code>clang</code>), Python 3, and Git. Setup help is included in Week‑0.</p>
+        </details>
+        <details>
+          <summary>Do you offer scholarships or refunds?</summary>
+          <p>Yes — limited merit/need‑based scholarships. If the program isn’t a fit after Week‑1, we offer a full refund. Write to <a href="mailto:hello@byteboost.site">hello@byteboost.site</a>.</p>
+        </details>
+        <details>
+          <summary>How are students assessed?</summary>
+          <p>Through weekly problem sets, a light mid‑module check, and the final capstone. Rubrics emphasize clarity, correctness, and communication.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- APPLY / CONTACT -->
+    <section id="apply">
+      <div class="container two">
+        <div class="card">
+          <h2>Enroll / Ask a Question</h2>
+          <p class="muted">No complicated forms on GitHub Pages. Click a button below and we’ll reply with the next steps, syllabus PDF, and payment options.</p>
+          <div class="cta">
+            <a class="btn" href="mailto:punita@edusensei.in?subject=Enroll%20ByteBoost%20Mentorship&body=Hi%20ByteBoost%2C%20I%27d%20like%20to%20enroll.%20Please%20share%20syllabus%20and%20payment%20details.%20Name%3A%20____%20City%3A%20____">Email Us</a>
+            <a class="btn alt" href="https://wa.me/919815301313?text=Hi%2C%20I%27m%20interested%20in%20ByteBoost%20Mentorship.">WhatsApp</a>
+          </div>
+        </div>
+        <div class="card">
+          <h2>One‑page deck</h2>
+          <p class="muted">Prefer a quick overview? Grab the program deck.</p>
+          <a class="btn" href="./syllabus.pdf">Download PDF</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;justify-content:space-between">
+        <small>© <span id="y"></span> ByteBoost Mentorship. All rights reserved.</small>
+        <small>Made with ♥︎ for future CS students.</small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    const btn = document.querySelector('.menu-btn');
+    const links = document.getElementById('primary-nav');
+    btn.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // Close menu when clicking a link (mobile)
+    links.addEventListener('click', (e) => {
+      if(e.target.tagName === 'A' && links.classList.contains('open')){
+        links.classList.remove('open');
+        btn.setAttribute('aria-expanded','false');
+      }
+    });
+  </script>
+</body>
+</html>
